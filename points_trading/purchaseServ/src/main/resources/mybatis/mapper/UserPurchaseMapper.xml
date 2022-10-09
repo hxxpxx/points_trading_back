@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bank.mapper.UserPurchaseMapper">
+  <resultMap id="BaseResultMap" type="org.bank.entity.UserPurchase">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="financial_id" jdbcType="VARCHAR" property="financialId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="hold_num" jdbcType="DECIMAL" property="holdNum" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, financial_id, title, hold_num, createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from   `user_purchase`
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from `user_purchase`
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.bank.entity.UserPurchase">
+    insert into `user_purchase` (id, user_id, financial_id, title,
+                    hold_num, createtime, updatetime)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{financialId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{holdNum,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP},
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.bank.entity.UserPurchase">
+    insert into `user_purchase`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="financialId != null">
+        financial_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="holdNum != null">
+        hold_num,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="financialId != null">
+        #{financialId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="holdNum != null">
+        #{hold_num,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bank.entity.UserPurchase">
+    update `user_purchase`
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="financialId != null">
+        financial_id = #{financialId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="holdNum != null">
+        hold_num = #{holdNum,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bank.entity.UserPurchase">
+    update `user_purchase`
+    set
+      user_id = #{userId,jdbcType=VARCHAR},
+      financial_id = #{financialId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      hold_num = #{holdNum,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="org.bank.entity.UserPurchase">
+    select <include refid="Base_Column_List"></include>
+    from `user_purchase`
+    <where>
+      1=1
+      <if test="title!=null and title!=''">
+        AND title LIKE concat('%',#{title},'%')
+      </if>
+      <if test="financialId!=null and financialId!=''">
+        AND financial_id LIKE concat('%',#{financialId},'%')
+      </if>
+      <if test="userId!=null and userId!=''">
+        AND user_id =#{userId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

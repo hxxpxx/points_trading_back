@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bank.mapper.PurchaseSnapshotMapper">
+  <resultMap id="BaseResultMap" type="org.bank.entity.PurchaseSnapshot">
+    <id column="purchase_no" jdbcType="VARCHAR" property="purchaseNo" />
+    <result column="financial_id" jdbcType="VARCHAR" property="financialId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    purchase_no, financial_id, title, `describe`, price, createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_snapshot
+    where purchase_no = #{purchaseNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from purchase_snapshot
+    where purchase_no = #{purchaseNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.bank.entity.PurchaseSnapshot">
+    insert into purchase_snapshot (purchase_no, financial_id, title, 
+      `describe`, price, createtime, 
+      updatetime)
+    values (#{purchaseNo,jdbcType=VARCHAR}, #{financialId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{describe,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.bank.entity.PurchaseSnapshot">
+    insert into purchase_snapshot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="purchaseNo != null">
+        purchase_no,
+      </if>
+      <if test="financialId != null">
+        financial_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="describe != null">
+        `describe`,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="purchaseNo != null">
+        #{purchaseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="financialId != null">
+        #{financialId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bank.entity.PurchaseSnapshot">
+    update purchase_snapshot
+    <set>
+      <if test="financialId != null">
+        financial_id = #{financialId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        `describe` = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where purchase_no = #{purchaseNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bank.entity.PurchaseSnapshot">
+    update purchase_snapshot
+    set financial_id = #{financialId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      `describe` = #{describe,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where purchase_no = #{purchaseNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
