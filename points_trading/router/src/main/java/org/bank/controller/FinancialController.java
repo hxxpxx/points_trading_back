@@ -1,6 +1,5 @@
 package org.bank.controller;
 
-
 import org.bank.aop.annotation.LogAnnotation;
 import org.bank.client.FinancialClient;
 import org.bank.entity.Financial;

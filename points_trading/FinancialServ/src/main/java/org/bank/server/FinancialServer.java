@@ -45,7 +45,6 @@ public class FinancialServer {
 
     @GetMapping("/financial/detail/{id}")
     @LogAnnotation(title = "商品管理", action = "查询商品详情")
-    @RequiresPermissions("financial:financial:list")
     public DataResult<Financial> detailInfo(@PathVariable("id") String id) {
         DataResult<Financial> result = DataResult.success();
         result.setData(financialService.detailInfo(id));
@@ -54,7 +53,6 @@ public class FinancialServer {
 
     @PostMapping("/financial/page")
     @LogAnnotation(title = "商品管理", action = "分页获取商品信息")
-    @RequiresPermissions("financial:financial:list")
     public DataResult<PageVO<Financial>> pageInfo(@RequestBody FinancialPageReqVO vo) {
         DataResult<PageVO<Financial>> result = DataResult.success();
         result.setData(financialService.pageInfo(vo));
@@ -93,5 +91,4 @@ public class FinancialServer {
         financialService.deductStock(vo);
         return result;
     }
-
 }

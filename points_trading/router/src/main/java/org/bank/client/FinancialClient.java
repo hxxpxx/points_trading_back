@@ -33,5 +33,4 @@ public interface FinancialClient {
 
     @PostMapping("/financial/page")
     public DataResult<PageVO<Financial>> pageInfo(@RequestBody FinancialPageReqVO vo);
-
 }
